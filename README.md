@@ -15,6 +15,7 @@ Hobby project implementation of the game Zombie Dice, to help explore Svelte/Sve
 - State transfer awesomeness via async stores over websockets
   - Use https://github.com/square/svelte-store
   - See https://www.youtube.com/watch?v=Rz8Ah1y2hJM
+- [SMUI](https://sveltematerialui.com/) and/or [Tailwind CSS](https://tailwindcss.com/)
 
 ## Developing
 
