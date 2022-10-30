@@ -1,18 +1,19 @@
-# create-svelte
+# zombie-dice-sveltekit
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Hobby project implementation of the game Zombie Dice, to help explore Svelte/Sveltekit and other programming areas. 
 
-## Creating a project
+## Interest Areas / Todos
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- Custom stores for all the things
+  - Stores-as-models. I like this guy's comments:
+    - https://www.reddit.com/r/sveltejs/comments/sm51kh/for_large_sveltesveltkit_projects_how_do_you/hvut3ln/
+    - https://www.reddit.com/r/sveltejs/comments/s7k3su/organisation_of_large_stores/htaijo1/
+- Websockets for real-time messaging
+  - Can use relatively simple relay server that broadcasts incoming JSON messages to other clients
+  - Can use https://github.com/websockets/ws for this
+- State transfer awesomeness via async stores over websockets
+  - Use https://github.com/square/svelte-store
+  - See https://www.youtube.com/watch?v=Rz8Ah1y2hJM
 
 ## Developing
 
