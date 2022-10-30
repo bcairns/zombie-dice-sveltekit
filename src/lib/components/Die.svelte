@@ -33,15 +33,18 @@
     .die {
         font-size: 2rem;
         font-weight: bold;
+        color: #333;
 
         width: 2em;
         height: 2em;
-        padding: 0.25em;
-        border: 1px solid #666;
-        border-radius: 0.3em;
+        padding: 0.35em;
+        border-radius: 0.4em;
 
         display: grid;
         place-content: center;
+
+        box-shadow: inset 3px 3px 2px rgba(255, 255, 255, .7),
+                    inset -3px -3px 2px rgba(0, 0, 0, .25);
     }
     img {
         max-width: 100%;
