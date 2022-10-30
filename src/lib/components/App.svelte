@@ -33,7 +33,7 @@
     <div class="players" style:--count={playerCount}>
         <div class="grid">
             {#each $players as state, index}
-                <Player {state} current={index === $currentPlayerIndex} />
+                <Player bind:state current={index === $currentPlayerIndex} />
             {/each}
         </div>
     </div>
