@@ -18,4 +18,7 @@
     .winner {
         background: #afa;
     }
+    p {
+        font-size: 1.5em;
+    }
 </style>

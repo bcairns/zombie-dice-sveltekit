@@ -94,6 +94,7 @@
 <style>
     .score {
         margin-top: 0.5em;
+        font-size: 1.5em;
     }
     .dice {
         margin-top: 1em;
@@ -111,10 +112,10 @@
         padding: 1em;
     }
     .dead .shotguns {
-        border-color: red;
+        border-color: var(--red);
     }
     .dead .score {
-        color: red;
+        color: var(--red);
         text-decoration: line-through;
     }
 </style>

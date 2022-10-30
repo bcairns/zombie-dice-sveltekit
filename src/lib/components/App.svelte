@@ -24,6 +24,9 @@
 </script>
 
 <main>
+    <header>
+        <h1>Zombie Dice</h1>
+    </header>
     <DiceBag bind:this={diceBag} />
     <DiceRoller {diceBag} {nextPlayer} />
     <div class="players" style:--count={playerCount}>
@@ -37,6 +40,10 @@
 </main>
 
 <style>
+    h1 {
+        font-size: 5em;
+        color: #EA1F27;
+    }
     main {
         display: grid;
         gap: 1em;
