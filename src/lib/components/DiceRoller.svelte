@@ -1,5 +1,5 @@
 <script>
-    import {onMount} from 'svelte';
+    import {onMount, getContext} from 'svelte';
     import {players} from '../stores/players.ts';
     import {options} from '../stores/options.ts';
     import {currentPlayerIndex} from '../stores/currentPlayerIndex.ts';
@@ -14,8 +14,8 @@
 
     import Die from './Die.svelte';
 
-    export let diceBag;
-    export let nextPlayer;
+    // export let diceBag;
+    // export let nextPlayer;
 
     const AUDIO_FILES = {
         dice: diceAudioFile,
@@ -36,20 +36,22 @@
 
     let isInitialRoll = true;
 
-    function reset() {
+    const gameContext = getContext('game');
+
+    export function reset() {
         buckets = {
             brain: [],
             footsteps: [],
             shotgun: []
         }
         isInitialRoll = true;
-        diceBag.reset();
+        gameContext.getDiceBag().reset();
     }
 
     function roll() {
         let newDiceCount = 3 - buckets.footsteps.length;
 
-        let dice = [...buckets.footsteps, ...diceBag.pullRandomDice(newDiceCount)];
+        let dice = [...buckets.footsteps, ...gameContext.getDiceBag().pullRandomDice(newDiceCount)];
         buckets.footsteps.length = 0;
 
         dice.forEach(die => {
@@ -84,20 +86,15 @@
 
     function stop() {
         if (!dead) {
-            addScoreToCurrentPlayer(buckets.brain.length);
+            $players[$currentPlayerIndex].score += buckets.brain.length;
             if ($options.soundFX) {
                 getZombieSound(buckets.brain.length).play();
             }
         }
 
-        nextPlayer();
+        gameContext.nextPlayer();
 
         reset();
-    }
-
-
-    function addScoreToCurrentPlayer(score) {
-        $players[$currentPlayerIndex].score += score;
     }
 
     onMount(async () => {

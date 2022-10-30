@@ -1,6 +1,8 @@
 <script>
     import '../global.css';
 
+    import { setContext } from 'svelte';
+
     import {players} from '../stores/players.ts';
     import {currentPlayerIndex} from '../stores/currentPlayerIndex.ts';
 
@@ -11,6 +13,7 @@
     import Header from './Header.svelte';
 
     let diceBag;
+    let diceRoller;
 
     let playerCount = 2;
 
@@ -23,6 +26,24 @@
     function nextPlayer() {
         $currentPlayerIndex = ( $currentPlayerIndex + 1 >= playerCount ) ? 0 : $currentPlayerIndex+1;
     }
+
+    function newGame() {
+        $players.forEach(player => player.score = 0);
+        $players = $players;
+        $currentPlayerIndex = 0;
+        diceRoller?.reset();
+        diceBag?.reset();
+    }
+
+    function getDiceBag() {
+        return diceBag;
+    }
+
+    setContext('game', {
+        getDiceBag,
+        nextPlayer,
+        newGame
+    });
 </script>
 
 <main>
@@ -34,7 +55,7 @@
             {/each}
         </div>
     </div>
-    <DiceRoller {diceBag} {nextPlayer} />
+    <DiceRoller bind:this={diceRoller} />
     <DiceBag bind:this={diceBag} />
 </main>
 
