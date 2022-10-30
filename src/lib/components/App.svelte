@@ -30,16 +30,15 @@
         <h1>Zombie Dice</h1>
         <Options />
     </header>
-    <DiceBag bind:this={diceBag} />
-    <DiceRoller {diceBag} {nextPlayer} />
     <div class="players" style:--count={playerCount}>
-        <h2>Players</h2>
         <div class="grid">
             {#each $players as state, index}
                 <Player {state} current={index === $currentPlayerIndex} />
             {/each}
         </div>
     </div>
+    <DiceRoller {diceBag} {nextPlayer} />
+    <DiceBag bind:this={diceBag} />
 </main>
 
 <style>

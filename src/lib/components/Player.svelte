@@ -5,7 +5,7 @@
 
 <section class="player" class:current class:winner={state.score >= 13}>
     <h2>{state.name}</h2>
-    <p>Score: {state.score}</p>
+    <div class="score">{state.score}</div>
 </section>
 
 <style>
@@ -18,7 +18,11 @@
     .winner {
         background: #afa;
     }
-    p {
-        font-size: 1.5em;
+    h2 {
+        margin: 0;
+    }
+    .score {
+        font-size: 7em;
+        color: var(--red);
     }
 </style>

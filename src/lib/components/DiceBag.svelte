@@ -46,7 +46,6 @@
 </script>
 
 <section>
-    <h2>Dice Bag</h2>
     <div class="dice">
         {#each dice as dieState}
             <Die {dieState} />

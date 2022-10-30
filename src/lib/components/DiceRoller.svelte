@@ -111,8 +111,6 @@
 </script>
 
 <section class:dead>
-    <h2>Dice Roller</h2>
-
     <div class="controls">
         <button on:click={roll} disabled={dead}>{rollLabel}</button>
         <button on:click={stop} disabled={isInitialRoll}>End Turn</button>
@@ -161,6 +159,7 @@
         border: 2px solid #eee;
         border-radius: 1em;
         padding: 1em;
+        min-height: 100px;
     }
     .dead .shotguns {
         border-color: var(--red);
