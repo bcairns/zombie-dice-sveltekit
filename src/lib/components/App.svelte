@@ -8,7 +8,7 @@
     import Player from './Player.svelte';
     import DiceRoller from './DiceRoller.svelte';
     import PlayerState from '../types/PlayerState.ts';
-    import Options from './Options.svelte';
+    import Header from './Header.svelte';
 
     let diceBag;
 
@@ -26,10 +26,7 @@
 </script>
 
 <main>
-    <header>
-        <h1>Zombie Dice</h1>
-        <Options />
-    </header>
+    <Header />
     <div class="players" style:--count={playerCount}>
         <div class="grid">
             {#each $players as state, index}
@@ -42,17 +39,6 @@
 </main>
 
 <style>
-    h1 {
-        font-size: 5em;
-        color: #EA1F27;
-    }
-    @supports (-webkit-background-clip: text) {
-        h1 {
-            background-image: linear-gradient(to top, #400, #E21143 50%, #FFF03A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    }
     main {
         display: grid;
         gap: 1em;
