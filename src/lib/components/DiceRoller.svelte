@@ -1,11 +1,18 @@
 <script>
+    import {onMount} from 'svelte';
     import {players} from '../stores/players.ts';
+    import {options} from '../stores/options.ts';
     import {currentPlayerIndex} from '../stores/currentPlayerIndex.ts';
+    import diceAudio from '../assets/audio/dice.wav';
+    import shotgunAudio from '../assets/audio/shotgun.wav';
 
     import Die from './Die.svelte';
 
     export let diceBag;
     export let nextPlayer;
+
+    let diceRollSound;
+    let shotgunSound;
 
     let buckets = {
         brain: [],
@@ -38,6 +45,14 @@
 
         buckets = buckets;
         isInitialRoll = false;
+
+        if ($options.soundFX) {
+            if (buckets.shotgun.length >= 3) {
+                shotgunSound.play();
+            } else {
+                diceRollSound.play();
+            }
+        }
     }
 
     function stop() {
@@ -54,6 +69,11 @@
     function addScoreToCurrentPlayer(score) {
         $players[$currentPlayerIndex].score += score;
     }
+
+    onMount(async () => {
+        diceRollSound = new Audio(diceAudio);
+        shotgunSound = new Audio(shotgunAudio);
+    });
 
     $: rollLabel = isInitialRoll ? 'Roll' : 'Roll Again';
     $: dead = buckets.shotgun.length >= 3;

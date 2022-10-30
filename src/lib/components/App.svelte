@@ -8,11 +8,13 @@
     import Player from './Player.svelte';
     import DiceRoller from './DiceRoller.svelte';
     import PlayerState from '../types/PlayerState.ts';
+    import Options from './Options.svelte';
 
     let diceBag;
 
     let playerCount = 2;
 
+    $players.length = 0;
     for (let i = 0; i < playerCount; i++) {
         $players.push(new PlayerState(`Player ${i+1}`));
         $players = $players;
@@ -26,6 +28,7 @@
 <main>
     <header>
         <h1>Zombie Dice</h1>
+        <Options />
     </header>
     <DiceBag bind:this={diceBag} />
     <DiceRoller {diceBag} {nextPlayer} />

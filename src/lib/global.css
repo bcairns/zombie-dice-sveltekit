@@ -9,11 +9,23 @@
     --zombie-font: edoregular, sans-serif;
 
     --red: #EA1F27;
+
+    --bg: white;
+    --fg: black;
+}
+
+.dark-mode {
+    --bg: #222;
+    --fg: white;
 }
 
 body {
     text-align: center;
+    background: var(--bg);
+    color: var(--fg);
 }
+
+
 body, button {
     font-family: var(--zombie-font);
 }
@@ -28,6 +40,7 @@ h1 {
 }
 h2 {
     margin-top: 0;
+    color: var(--red);
 }
 
 section {
@@ -42,3 +55,4 @@ section {
     font-weight: normal;
     font-style: normal;
 }
+
