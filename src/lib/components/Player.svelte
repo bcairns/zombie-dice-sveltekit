@@ -13,6 +13,7 @@
         border-color: #ddd;
     }
     input {
+        max-width: 100%;
         background: transparent;
         border: none;
         font-family: var(--zombie-font);

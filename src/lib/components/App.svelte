@@ -15,16 +15,16 @@
     let diceBag;
     let diceRoller;
 
-    let playerCount = 2;
+    let initialPlayerCount = 2;
 
     $players.length = 0;
-    for (let i = 0; i < playerCount; i++) {
+    for (let i = 0; i < initialPlayerCount; i++) {
         $players.push(new PlayerState(`Player ${i+1}`));
         $players = $players;
     }
 
     function nextPlayer() {
-        $currentPlayerIndex = ( $currentPlayerIndex + 1 >= playerCount ) ? 0 : $currentPlayerIndex+1;
+        $currentPlayerIndex = ( $currentPlayerIndex + 1 >= $players.length ) ? 0 : $currentPlayerIndex+1;
     }
 
     function newGame() {
@@ -35,6 +35,21 @@
         diceBag?.reset();
     }
 
+    function addPlayer() {
+        $players.push(new PlayerState(`Player ${$players.length + 1}`));
+        $players = $players;
+    }
+
+    function removePlayer() {
+        if ($players.length > 2) {
+            $players.length--;
+        }
+        $players = $players;
+        if ($currentPlayerIndex >= $players.length) {
+            $currentPlayerIndex = 0;
+        }
+    }
+
     function getDiceBag() {
         return diceBag;
     }
@@ -42,13 +57,15 @@
     setContext('game', {
         getDiceBag,
         nextPlayer,
+        addPlayer,
+        removePlayer,
         newGame
     });
 </script>
 
 <main>
     <Header />
-    <div class="players" style:--count={playerCount}>
+    <div class="players" style:--count={$players.length}>
         <div class="grid">
             {#each $players as state, index}
                 <Player bind:state current={index === $currentPlayerIndex} />

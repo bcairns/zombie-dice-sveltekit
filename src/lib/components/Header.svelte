@@ -1,9 +1,11 @@
 <script>
     import GameControls from './GameControls.svelte';
+    import PlayerCountControls from './PlayerCountControls.svelte';
 </script>
 
 <header>
     <h1>Zombie Dice</h1>
+    <PlayerCountControls />
     <GameControls />
 </header>
 
