@@ -3,16 +3,30 @@
     import {players} from '../stores/players.ts';
     import {options} from '../stores/options.ts';
     import {currentPlayerIndex} from '../stores/currentPlayerIndex.ts';
-    import diceAudio from '../assets/audio/dice.wav';
-    import shotgunAudio from '../assets/audio/shotgun.wav';
+
+    // todo: throw into a separate audio player component or helper
+    import diceAudioFile from '../assets/audio/dice.wav';
+    import shotgunAudioFile from '../assets/audio/shotgun.wav';
+    import missAudioFile from '../assets/audio/zombie-attack.wav';
+    import brains1AudioFile from '../assets/audio/brains1.wav';
+    import brains2AudioFile from '../assets/audio/brains2.wav';
+    import brains3AudioFile from '../assets/audio/brains3.wav';
 
     import Die from './Die.svelte';
 
     export let diceBag;
     export let nextPlayer;
 
-    let diceRollSound;
-    let shotgunSound;
+    const AUDIO_FILES = {
+        dice: diceAudioFile,
+        shotgun: shotgunAudioFile,
+        miss: missAudioFile,
+        brains1: brains1AudioFile,
+        brains2: brains2AudioFile,
+        brains3: brains3AudioFile
+    }
+
+    const AUDIO = {};
 
     let buckets = {
         brain: [],
@@ -48,16 +62,32 @@
 
         if ($options.soundFX) {
             if (buckets.shotgun.length >= 3) {
-                shotgunSound.play();
+                AUDIO.shotgun.play();
             } else {
-                diceRollSound.play();
+                AUDIO.dice.play();
             }
         }
+    }
+
+    function getZombieSound(brainCount) {
+        if (buckets.brain.length >= 5) {
+            return AUDIO.brains3;
+        }
+        if (buckets.brain.length >= 3) {
+            return AUDIO.brains2;
+        }
+        if (buckets.brain.length >= 1) {
+            return AUDIO.brains1;
+        }
+        return AUDIO.miss;
     }
 
     function stop() {
         if (!dead) {
             addScoreToCurrentPlayer(buckets.brain.length);
+            if ($options.soundFX) {
+                getZombieSound(buckets.brain.length).play();
+            }
         }
 
         nextPlayer();
@@ -71,8 +101,9 @@
     }
 
     onMount(async () => {
-        diceRollSound = new Audio(diceAudio);
-        shotgunSound = new Audio(shotgunAudio);
+        for (let key in AUDIO_FILES) {
+            AUDIO[key] = new Audio(AUDIO_FILES[key])
+        }
     });
 
     $: rollLabel = isInitialRoll ? 'Roll' : 'Roll Again';
