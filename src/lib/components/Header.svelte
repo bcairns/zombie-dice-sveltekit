@@ -1,10 +1,23 @@
 <script>
+    import {gameState} from '../stores/gameState.ts';
+    import {players} from '../stores/players.ts';
     import GameControls from './GameControls.svelte';
     import PlayerCountControls from './PlayerCountControls.svelte';
+
+    export let winnerIndex;
+
+    function getTitle(state) {
+        switch (state) {
+            case 'finalRound': return 'Final Round!';
+            case 'tieBreaker': return 'Tie Breaker!';
+            case 'gameOver': return `${$players[winnerIndex].name} wins!`;
+            default: return 'Zombie Dice';
+        }
+    }
 </script>
 
 <header>
-    <h1>Zombie Dice</h1>
+    <h1>{getTitle($gameState)}</h1>
     <PlayerCountControls />
     <GameControls />
 </header>

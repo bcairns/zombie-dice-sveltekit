@@ -1,4 +1,6 @@
 <script>
+    import {gameState} from '../stores/gameState.ts';
+
     import {onMount, getContext} from 'svelte';
     import {players} from '../stores/players.ts';
     import {options} from '../stores/options.ts';
@@ -86,7 +88,12 @@
 
     function stop() {
         if (!dead) {
+
             $players[$currentPlayerIndex].score += buckets.brain.length;
+            if ($players[$currentPlayerIndex].score >= 13) {
+                gameState.reached13();
+            }
+
             if ($options.soundFX) {
                 getZombieSound(buckets.brain.length).play();
             }
@@ -105,12 +112,13 @@
 
     $: rollLabel = isInitialRoll ? 'Roll' : 'Roll Again';
     $: dead = buckets.shotgun.length >= 3;
+    $: gameOver = $gameState === 'gameOver';
 </script>
 
 <section class:dead>
     <div class="controls">
-        <button on:click={roll} disabled={dead}>{rollLabel}</button>
-        <button on:click={stop} disabled={isInitialRoll}>End Turn</button>
+        <button on:click={roll} disabled={gameOver || dead}>{rollLabel}</button>
+        <button on:click={stop} disabled={gameOver || isInitialRoll}>End Turn</button>
     </div>
 
     <div class="score">

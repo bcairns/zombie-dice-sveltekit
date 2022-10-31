@@ -7,12 +7,4 @@ export default class PlayerState {
     constructor(name: string) {
         this.name = name;
     }
-
-    addScore(increase) {
-        this.score += increase;
-    }
-
-    resetScore() {
-        this.score = 0;
-    }
 }

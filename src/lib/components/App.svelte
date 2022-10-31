@@ -1,5 +1,6 @@
 <script>
     import '../global.css';
+    import {gameState} from '../stores/gameState.ts';
 
     import { setContext } from 'svelte';
 
@@ -14,6 +15,7 @@
 
     let diceBag;
     let diceRoller;
+    let winners = [];
 
     let initialPlayerCount = 2;
 
@@ -24,7 +26,48 @@
     }
 
     function nextPlayer() {
-        $currentPlayerIndex = ( $currentPlayerIndex + 1 >= $players.length ) ? 0 : $currentPlayerIndex+1;
+        if ($currentPlayerIndex + 1 >= $players.length) {
+            roundComplete();
+        } else {
+            $currentPlayerIndex++;
+        }
+    }
+
+    // returns array of player indices that are winners (highest score and >= 13)
+    // multiple winners indicates a tie
+    function getWinners(playerStates) {
+        const winners = [];
+        let highestScore = 0;
+
+        playerStates.forEach((player, index) => {
+            if (player.score >= 13) {
+                if (player.score === highestScore) {
+                    winners.push(index)
+                }
+                if (player.score > highestScore) {
+                    winners.length = 0;
+                    winners.push(index);
+                    highestScore = player.score;
+                }
+            }
+        });
+
+        return winners;
+    }
+
+    function roundComplete() {
+        if ($gameState === 'finalRound' || $gameState === 'tieBreaker') {
+            // todo: check for actual winner / tiebreaker
+
+            winners = getWinners($players);
+            if (winners.length >= 2) {
+                gameState.tie();
+            } else {
+                gameState.winner();
+            }
+
+        }
+        $currentPlayerIndex = 0;
     }
 
     function newGame() {
@@ -33,6 +76,7 @@
         $currentPlayerIndex = 0;
         diceRoller?.reset();
         diceBag?.reset();
+        gameState.startPlaying();
     }
 
     function addPlayer() {
@@ -61,10 +105,16 @@
         removePlayer,
         newGame
     });
+
+    $: if ($gameState === 'startNewGame') {
+        newGame();
+    }
+
+    $: winnerIndex = $gameState === 'gameOver' ? winners[0] : '';
 </script>
 
 <main>
-    <Header />
+    <Header {winnerIndex} />
     <div class="players" style:--count={$players.length}>
         <div class="grid">
             {#each $players as state, index}

@@ -1,8 +1,10 @@
 <script>
-    import {getContext} from 'svelte';
+    import {gameState} from '../stores/gameState.ts';
+
+    // import {getContext} from 'svelte';
     import {options} from '../stores/options.ts';
 
-    const gameContext = getContext('game');
+    // const gameContext = getContext('game');
 
     function setDarkMode(enabled) {
         window.document.body.classList.toggle('dark-mode', enabled);
@@ -12,7 +14,7 @@
 </script>
 
 <div class="options">
-    <button on:click={gameContext.newGame}>New Game</button>
+    <button on:click={gameState.newGame}>New Game</button>
     <label><input type="checkbox" bind:checked={$options.darkMode}> Dark Mode</label>
     <label><input type="checkbox" bind:checked={$options.soundFX}> Sound FX</label>
 </div>

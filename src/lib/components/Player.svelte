@@ -1,9 +1,11 @@
 <script>
+    import {gameState} from '../stores/gameState.ts';
+
     export let state;
     export let current;
 </script>
 
-<section class="player" class:current class:winner={state.score >= 13}>
+<section class="player" class:current={current && $gameState !== 'gameOver'} class:winner={state.score >= 13}>
     <h2><input bind:value={state.name} /></h2>
     <div class="score">{state.score}</div>
 </section>
