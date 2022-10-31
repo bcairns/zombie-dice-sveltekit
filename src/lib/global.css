@@ -12,14 +12,19 @@
 
     --bg: white;
     --fg: black;
+    --faint-border: #ddd;
+    --win-bg: #afa;
 }
 
 .dark-mode {
     --bg: #222;
     --fg: white;
+    --faint-border: #666;
+    --win-bg: #060;
 }
 
 body {
+    margin: 1em;
     text-align: center;
     background: var(--bg);
     color: var(--fg);
@@ -43,9 +48,9 @@ h2 {
 }
 
 section {
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 1em;
+    /*border: 2px solid var(--border-color);*/
+    /*border-radius: var(--border-radius);*/
+    /*padding: 1em;*/
 }
 
 @font-face {

@@ -10,7 +10,9 @@
 
 <style>
     .player {
-        border-color: #ddd;
+        border: 2px solid transparent;
+        border-radius: 2em;
+        padding: 1em;
     }
     input {
         max-width: 100%;
@@ -22,10 +24,10 @@
         color: var(--fg);
     }
     .current {
-        border-color: green;
+        border-color: var(--fg);
     }
     .winner {
-        background: #afa;
+        background: var(--win-bg);
     }
     h2 {
         margin: 0;

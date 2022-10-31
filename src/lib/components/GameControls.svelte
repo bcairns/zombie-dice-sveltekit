@@ -3,19 +3,13 @@
     import {options} from '../stores/options.ts';
 
     const gameContext = getContext('game');
-</script>
 
-<svelte:head>
-    {#if $options.darkMode}
-        <style>
-            /* seems we can't easily add a class to the body */
-            body {
-                --bg: #222;
-                --fg: white;
-            }
-        </style>
-    {/if}
-</svelte:head>
+    function setDarkMode(enabled) {
+        window.document.body.classList.toggle('dark-mode', enabled);
+    }
+
+    $: setDarkMode($options.darkMode);
+</script>
 
 <div class="options">
     <button on:click={gameContext.newGame}>New Game</button>

@@ -153,7 +153,7 @@
         flex-wrap: wrap;
         gap: 0.5em;
         justify-content: center;
-        border: 2px solid #eee;
+        border: 2px solid var(--faint-border);
         border-radius: 1em;
         padding: 1em;
         min-height: 100px;
