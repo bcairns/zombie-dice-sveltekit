@@ -1,3 +1,7 @@
+/**
+ * represents game state.  Intended to be manipulated only by fsm
+ */
+
 import { writable } from 'svelte/store';
 import { currentPlayerIndex } from './currentPlayerIndex';
 import { partitionArray } from '../util/arrayStuff.ts';
@@ -8,6 +12,8 @@ const { subscribe: game, set, update } = writable({});
 // we expose things like customizing dice, add player names,
 // and whatevert else
 const newGame = (numPlayers) => {
+
+  // todo: it doesn't work to fill arrays like this, it's copying a reference to the same object (see: https://codepen.io/bcairns/pen/eYKZrGp?editors=0011)
   const players = Array(numPlayers).fill({
     name: '',
     score: 0
@@ -18,6 +24,7 @@ const newGame = (numPlayers) => {
   const hardDice = 3;
   const totalDice = easyDice + mediumDice + hardDice;
 
+  // todo: can't use Array.fill() like this, see above
   const diceInBag = Array(totalDice)
     .fill({type: 'easy', showing: ''}, 0, easyDice)
     .fill({type: 'medium', showing: ''}, easyDice, easyDice + mediumDice)
