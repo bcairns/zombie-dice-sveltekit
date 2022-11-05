@@ -5,19 +5,20 @@
     import PlayerCountControls from './PlayerCountControls.svelte';
 
     export let winnerIndex;
-
-    function getTitle(state) {
-        switch (state) {
-            case 'finalRound': return 'Final Round!';
-            case 'tieBreaker': return 'Tie Breaker!';
-            case 'gameOver': return `${$players[winnerIndex].name} wins!`;
-            default: return 'Zombie Dice';
-        }
-    }
 </script>
 
 <header>
-    <h1>{getTitle($gameState)}</h1>
+    <h1>
+        {#if $gameState === 'finalRound'}
+            Final Round!
+        {:else if $gameState === 'tieBreaker'}
+            Tie Breaker!
+        {:else if $gameState === 'gameOver'}
+            {$players[winnerIndex].name} wins!
+        {:else}
+            Zombie Dice
+        {/if}
+    </h1>
     <PlayerCountControls />
     <GameControls />
 </header>
