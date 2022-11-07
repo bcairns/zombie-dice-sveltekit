@@ -117,26 +117,31 @@
 
 <section class:dead>
     <div class="controls">
-        <button on:click={roll} disabled={gameOver || dead}>{rollLabel}</button>
-        <button on:click={stop} disabled={gameOver || isInitialRoll}>End Turn</button>
+        <button class="text-4xl" on:click={roll} disabled={gameOver || dead}>{rollLabel}</button>
+        <button class="text-4xl" on:click={stop} disabled={gameOver || isInitialRoll}>End Turn</button>
     </div>
 
-    <div class="score">
+    <div class="score mt-2 text-xl"
+         class:text-red={dead}
+         class:line-through={dead}
+    >
         Score: {buckets.brain.length}
     </div>
 
-    <div class="dice">
-        <div class="brains bucket">
+    <div class="dice mt-4 grid grid-cols-3 gap-4">
+        <div class="brains bucket flex flex-wrap gap-2 justify-center border-2 border-faint rounded-2xl p-4 min-h-[108px]">
             {#each buckets.brain as dieState}
                 <Die {dieState}/>
             {/each}
         </div>
-        <div class="footsteps bucket">
+        <div class="footsteps bucket flex flex-wrap gap-2 justify-center border-2 border-faint rounded-2xl p-4 min-h-[108px]">
             {#each buckets.footsteps as dieState}
                 <Die {dieState}/>
             {/each}
         </div>
-        <div class="shotguns bucket">
+        <div class="shotguns bucket flex flex-wrap gap-2 justify-center border-2 border-faint rounded-2xl p-4 min-h-[108px]"
+             class:border-red={dead}
+        >
             {#each buckets.shotgun as dieState}
                 <Die {dieState}/>
             {/each}
@@ -144,33 +149,3 @@
     </div>
 
 </section>
-
-<style>
-    .score {
-        margin-top: 0.5em;
-        font-size: 1.5em;
-    }
-    .dice {
-        margin-top: 1em;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1em;
-    }
-    .bucket {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5em;
-        justify-content: center;
-        border: 2px solid var(--faint-border);
-        border-radius: 1em;
-        padding: 1em;
-        min-height: 100px;
-    }
-    .dead .shotguns {
-        border-color: var(--red);
-    }
-    .dead .score {
-        color: var(--red);
-        text-decoration: line-through;
-    }
-</style>

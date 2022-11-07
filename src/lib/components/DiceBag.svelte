@@ -46,18 +46,9 @@
 </script>
 
 <section>
-    <div class="dice">
+    <div class="dice flex flex-wrap gap-2 justify-center">
         {#each dice as dieState}
             <Die {dieState} />
         {/each}
     </div>
 </section>
-
-<style>
-    .dice {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5em;
-        justify-content: center;
-    }
-</style>

@@ -8,12 +8,12 @@ export default class DieState {
     /**
      * brain|shotgun|footprints
      */
-    public result: string;
+    public result: string|undefined;
 
     /**
      * define dice types (# of brain/shotgun symbols)
      */
-    private readonly static TYPES = {
+    private static readonly TYPES = {
         easy: {
             brains: 3,
             shotguns: 1
@@ -41,7 +41,7 @@ export default class DieState {
      * randomly return one of 'brain', 'shotgun', 'footsteps', depending on type
      * @param type 'easy', 'medium', or 'hard'
      */
-    private static getRandomResult(type) {
+    private static getRandomResult(type:string) {
         const roll = Math.floor(Math.random() * 6); // 0..5
 
         if (roll < this.TYPES[type].brains) {

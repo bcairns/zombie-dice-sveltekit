@@ -113,10 +113,12 @@
     $: winnerIndex = $gameState === 'gameOver' ? winners[0] : '';
 </script>
 
-<main>
+<main class="m-4 relative grid gap-4">
     <Header {winnerIndex} />
-    <div class="players" style:--count={$players.length}>
-        <div class="grid">
+    <div class="players">
+        <div class="grid gap-4"
+             style:grid-template-columns="repeat({$players.length}, minmax(0, 1fr)"
+        >
             {#each $players as state, index}
                 <Player bind:state current={index === $currentPlayerIndex} />
             {/each}
@@ -125,16 +127,3 @@
     <DiceRoller bind:this={diceRoller} />
     <DiceBag bind:this={diceBag} />
 </main>
-
-<style>
-    main {
-        display: grid;
-        gap: 1em;
-    }
-
-    .players .grid {
-        display: grid;
-        gap: 1em;
-        grid-template-columns: repeat(var(--count), minmax(0, 1fr));
-    }
-</style>
