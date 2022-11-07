@@ -122,7 +122,7 @@
     </div>
 
     <div class="score mt-2 text-xl"
-         class:text-red={dead}
+         class:text-bloodred={dead}
          class:line-through={dead}
     >
         Score: {buckets.brain.length}
@@ -140,7 +140,7 @@
             {/each}
         </div>
         <div class="shotguns bucket flex flex-wrap gap-2 justify-center border-2 border-faint rounded-2xl p-4 min-h-[108px]"
-             class:border-red={dead}
+             class:border-bloodred={dead}
         >
             {#each buckets.shotgun as dieState}
                 <Die {dieState}/>
