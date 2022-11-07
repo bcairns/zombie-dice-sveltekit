@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  web:
+    image: node:18-bullseye
+    command: bash -c 'npm install && npm run dev -- --host'
+    ports:
+      - '5173:5173'
+    working_dir: '/zombie-dice-sveltekit'
+    expose:
+      - '5173'
+    volumes:
+      - '.:/zombie-dice-sveltekit'
+      - node_modules:/zombie-dice-sveltekit/node_modules
+    environment:
+      - VITE_ENVIRONMENT=development
+volumes:
+  node_modules:
