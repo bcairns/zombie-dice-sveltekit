@@ -11,7 +11,9 @@
     events.onmessage = (event) => {
       messages = [...messages, event.data];
     };
-
+    return () => {
+      events.close();
+    }
     // setInterval(async () => {
     //   await fetch(`/sse/${$page.params['id']}`, {
     //     method: 'POST',

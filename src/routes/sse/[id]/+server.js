@@ -1,5 +1,5 @@
 // Store all connections in a set-map
-const clients = new Set();
+const clients = new Map();
 
 /** @type {import('./$types').RequestHandler} */
 export const GET = ({ params }) => {
@@ -9,10 +9,10 @@ export const GET = ({ params }) => {
 		new ReadableStream({
 			start: (_) => {
 				controller = _;
-				clients.add({ id: params['id'], connection: controller });
+				clients.set(params['id'], controller);
 			},
 			cancel: () => {
-				clients.delete({ id: params['id'], connection: controller });
+				clients.delete(params['id']);
 			}
 		}),
 		{
@@ -29,7 +29,7 @@ export const GET = ({ params }) => {
 export const POST = async ({ request, params }) => {
 	const encoder = new TextEncoder();
 	const message = await request.text();
-	for (const { id, connection } of clients) {
+	for (const [id, connection] of clients) {
 		if (id === params['id']) {
 			continue;
 		}
