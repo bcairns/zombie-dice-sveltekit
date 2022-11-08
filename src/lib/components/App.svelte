@@ -113,7 +113,7 @@
     $: winnerIndex = $gameState === 'gameOver' ? winners[0] : '';
 </script>
 
-<main class="m-4 relative grid gap-4">
+<main class="relative grid gap-4">
     <Header {winnerIndex} />
     <div class="players">
         <div class="grid gap-4"

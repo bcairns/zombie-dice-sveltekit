@@ -3,12 +3,13 @@
     import {players} from '../stores/players.ts';
     import GameControls from './GameControls.svelte';
     import PlayerCountControls from './PlayerCountControls.svelte';
+    import GradientHeading from './GradientHeading.svelte';
 
     export let winnerIndex;
 </script>
 
 <header>
-    <h1 class="text-red text-8xl m-1 leading-none text-gradient-red">
+    <GradientHeading>
         {#if $gameState === 'finalRound'}
             Final Round!
         {:else if $gameState === 'tieBreaker'}
@@ -18,7 +19,8 @@
         {:else}
             Zombie Dice
         {/if}
-    </h1>
+    </GradientHeading>
+
     <PlayerCountControls />
     <GameControls />
 </header>

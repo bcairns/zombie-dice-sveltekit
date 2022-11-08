@@ -23,6 +23,7 @@ body {
     text-align: center;
     background: var(--bg);
     color: var(--fg);
+    margin: 1rem;
 }
 
 body, button {
@@ -44,6 +45,10 @@ button:disabled {
     color: #888;
     border-color: #888;
     opacity: 0.6;
+}
+input {
+    background-color: var(--fg);
+    color: var(--bg);
 }
 
 @font-face {
