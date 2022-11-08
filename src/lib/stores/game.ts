@@ -13,22 +13,27 @@ const { subscribe: game, set, update } = writable({});
 // and whatevert else
 const newGame = (numPlayers) => {
 
-  // todo: it doesn't work to fill arrays like this, it's copying a reference to the same object (see: https://codepen.io/bcairns/pen/eYKZrGp?editors=0011)
-  const players = Array(numPlayers).fill({
+  const players = Array(numPlayers).fill().map(() => ({
     name: '',
-    score: 0
-  });
+    score: 0,
+    id:
+  }));
 
-  const easyDice = 5;
-  const mediumDice = 4;
-  const hardDice = 3;
-  const totalDice = easyDice + mediumDice + hardDice;
+  const numEasyDice = 5;
+  const numMediumDice = 4;
+  const numHardDice = 3;
 
-  // todo: can't use Array.fill() like this, see above
-  const diceInBag = Array(totalDice)
-    .fill({type: 'easy', showing: ''}, 0, easyDice)
-    .fill({type: 'medium', showing: ''}, easyDice, easyDice + mediumDice)
-    .fill({type: 'hard', showing: ''}, easyDice + mediumDice)
+  const easyDice = Array(numEasyDice).fill().map(
+    () => ({type: 'easy', showing: ''})
+  );
+  const mediumDice = Array(numMediumDice).fill().map(
+    () => ({type: 'medium', showing: ''})
+  );
+  const hardDice = Array(numHardDice).fill().map(
+    () => ({type: 'hard', showing: ''})
+  );
+
+  const diceInBag = [...easyDice, ...mediumDice, ...hardDice];
 
   set({
     currentPlayerIndex: 0,

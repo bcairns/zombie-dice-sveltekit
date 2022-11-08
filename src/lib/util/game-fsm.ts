@@ -5,7 +5,7 @@ import { gameManipulator } from '../stores/game';
 const rollDice = () => {
   gameManipulator.rollDice();
   return 'resolveDice';
-}
+};
 
 const gameFsm = fsm('initial', {
   initial: {
