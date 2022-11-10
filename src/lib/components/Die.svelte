@@ -1,9 +1,10 @@
-<script>
+<script type="ts">
     import brainIcon from '$lib/assets/icons/brain.png';
     import shotgunIcon from '$lib/assets/icons/blast.png';
     import footstepsIcon from '$lib/assets/icons/footsteps.png';
+    import DieState from '$lib/types/DieState';
 
-    export let dieState;
+    export let dieState:DieState;
 
     const RESULTS = {
         brain: {
@@ -21,42 +22,16 @@
     }
 </script>
 
-<div class="die {dieState.type} {dieState.result}">
+<div class="die text-4xl text-black w-[2em] h-[2em] rounded-xl grid place-items-center shadow-bevel p-2"
+     class:bg-green-400={dieState.type === 'easy'}
+     class:bg-yellow-400={dieState.type === 'medium'}
+     class:bg-red-500={dieState.type === 'hard'}
+>
     {#if dieState.result}
-        <img src={RESULTS[dieState.result].image} alt={RESULTS[dieState.result].label} />
+        <img src={RESULTS[dieState.result].image} alt={RESULTS[dieState.result].label}
+             class="max-w-full max-h-14"
+        />
     {:else}
         ?
     {/if}
 </div>
-
-<style>
-    .die {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #333;
-
-        width: 2em;
-        height: 2em;
-        padding: 0.35em;
-        border-radius: 0.4em;
-
-        display: grid;
-        place-content: center;
-
-        box-shadow: inset 3px 3px 2px rgba(255, 255, 255, .7),
-                    inset -3px -3px 2px rgba(0, 0, 0, .25);
-    }
-    img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-    .easy {
-        background-color: lightgreen;
-    }
-    .medium {
-        background-color: yellow;
-    }
-    .hard {
-        background-color: red;
-    }
-</style>
