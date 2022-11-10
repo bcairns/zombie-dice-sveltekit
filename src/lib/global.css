@@ -30,16 +30,13 @@ body, button {
     font-family: var(--zombie-font);
 }
 button {
-    padding: 0.1em 0.5em;
     border: 1px solid var(--fg);
     border-radius: 1em;
-    transition: all 0.2s;
-    background: var(--fg);
-    color: var(--bg);
+    padding: 0.05em 0.5em;
 }
 button:hover:not(:disabled) {
-    background: transparent;
-    color: var(--fg);
+    background: var(--fg);
+    color: var(--bg);
 }
 button:disabled {
     color: #888;

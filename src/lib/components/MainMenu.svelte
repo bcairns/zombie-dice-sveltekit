@@ -11,7 +11,7 @@
     }
 
     function join() {
-        goto(`/play/${code}`);
+        goto(`/lobby/${code}`);
     }
 
     function getRandomLetter() {

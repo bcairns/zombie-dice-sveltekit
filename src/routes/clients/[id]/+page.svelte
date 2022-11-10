@@ -7,8 +7,10 @@
   let chat = '';
 
   onMount(() => {
+    console.log('subscribing to event source', `/sse/${$page.params['id']}`);
     const events = new EventSource(`/sse/${$page.params['id']}`);
     events.onmessage = (event) => {
+      console.log('message received from event source', `/sse/${$page.params['id']}`)
       messages = [...messages, event.data];
     };
     return () => {
@@ -24,6 +26,7 @@
 
   const handleSubmit = async () => {
     if (chat){
+      console.log('posting to ', `/sse/${$page.params['id']}`)
       await fetch(`/sse/${$page.params['id']}`, {
         method: 'POST',
         body: chat

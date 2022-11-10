@@ -27,6 +27,7 @@ export const GET = ({ params }) => {
 
 /** @type {import('./$types').RequestHandler} */
 export const POST = async ({ request, params }) => {
+	console.log('SSE server received POST');
 	const encoder = new TextEncoder();
 	const message = await request.text();
 	for (const [id, connection] of clients) {
