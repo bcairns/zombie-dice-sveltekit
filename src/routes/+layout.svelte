@@ -7,7 +7,7 @@
 <ThemeSwitcher />
 
 <nav class="text-left">
-    <a href="/">Back to Main Menu</a>
+    <a href="/">Back to Main Menu!!</a>
 </nav>
 <hr>
 
